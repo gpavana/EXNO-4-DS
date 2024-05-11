@@ -25,54 +25,171 @@ The feature selection techniques used are:
 3.Embedded Method
 
 #### CODING AND OUTPUT:
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
 
-#### Feature Scaling
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/c0fcc85b-1a64-42a1-b695-a77acc191a1c)
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/3c511b62-cf5b-4ed4-aafd-7e98ef34adb1)
+data=pd.read_csv("/content/income(1) (1).csv",na_values=[ " ?"])
+data
+```
+![alt text](image.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/4a33bbf5-aa3d-44e0-885f-862bbc8535b0)
+data.isnull().sum()
+```
+![alt text](image-1.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/49956ce8-30ef-49a5-9373-684c97e50dd1)
+missing=data[data.isnull().any(axis=1)]
+missing
+```
+![alt text](image-2.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/00c4fce9-72b3-4825-9684-a530b9bb5b03)
+data2=data.dropna(axis=0)
+data2
+```
+![alt text](image-3.png)
+```python
+sal=data["SalStat"]
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/fedaf993-1b6f-4303-9411-5fce5446dc56)
+data2["SalStat"]=data["SalStat"].map({' less than or equal to 50,000':0,' greater than 50,000':1})
+print(data2['SalStat'])
+```
+![alt text](image-4.png)
+```python
+sal2=data2['SalStat']
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/990e0bbe-fcd0-45a3-a3bc-9d99a496b847)
+dfs=pd.concat([sal,sal2],axis=1)
+dfs
+```
+![alt text](image-5.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/069e2e11-8fdb-472c-b080-abc17afb3637)
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/83cbfc9d-5fc7-49d9-abed-1de6f5e9794c)
+data2
+```
+![alt text](image-6.png)
+```python
+new_data=pd.get_dummies(data2, drop_first=True)
+new_data
+```
+![alt text](image-7.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/9ab2c4a5-332f-4b83-bf85-d4a3812b0e6c)
+columns_list=list(new_data.columns)
+print(columns_list)
+```
+![alt text](image-8.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/9d7ff7f7-b75b-4c24-9ba0-db197319be88)
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/7d8cdcfe-5c4f-4adc-a7bd-325c2b1c7b16)
+features=list(set(columns_list)-set(['SalStat']))
+print(features)
+```
+![alt text](image-9.png)
+```python
+y=new_data['SalStat'].values
+print(y)
+```
+![alt text](image-10.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/e1b84a1d-3857-4847-aec2-c0cbf396fd78)
+x=new_data[features].values
+print(x)
+```
+![alt text](image-11.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/060bf5fd-17ec-4214-b050-141f75ea4947)
+train_x,test_x,train_y,test_y=train_test_split(x,y,test_size=0.3,random_state=0)
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/dc510697-83ee-406b-82b4-64a64ac02067)
+KNN_classifier=KNeighborsClassifier(n_neighbors = 5)
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/c3870d08-7ae6-4a25-a83f-17e242e86a76)
+KNN_classifier.fit(train_x,train_y)
+```
+![alt text](image-12.png)
+```python
 
-#### Feature Selection
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/44e6c707-522d-46c2-8dc9-ead0ec8da4d7)
+prediction=KNN_classifier.predict(test_x)
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/2d3622e5-a59e-493f-8e84-d7138ccfa65b)
+confusionMatrix=confusion_matrix(test_y, prediction)
+print(confusionMatrix)
+```
+![alt text](image-13.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/e4b7b9ad-9450-451c-9e50-59ac46f9d5bd)
+accuracy_score=accuracy_score(test_y,prediction)
+print(accuracy_score)
+```
+![alt text](image-14.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/6a99cb65-069e-49aa-8100-7b56f3973fce)
+print("Misclassified Samples : %d" % (test_y !=prediction).sum())
+```
+![alt text](image-15.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/e39261c9-fcf4-4aaa-9abb-9ceb0b1d5bed)
+data.shape
+```
+![alt text](image-16.png)
+```python
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/01b6908a-22f6-4ffe-9a6a-a066ee406cad)
+import pandas as pd
+from sklearn.feature_selection import SelectKBest, mutual_info_classif, f_classif
+data={
+    'Feature1': [1,2,3,4,5],
+    'Feature2': ['A','B','C','A','B'],
+    'Feature3': [0,1,1,0,1],
+    'Target'  : [0,1,1,0,1]
+}
 
-![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/bd40332c-e997-4618-82e1-f33d78ee5af9)
+df=pd.DataFrame(data)
+x=df[['Feature1','Feature3']]
+y=df[['Target']]
 
+selector=SelectKBest(score_func=mutual_info_classif,k=1)
+x_new=selector.fit_transform(x,y)
+
+selected_feature_indices=selector.get_support(indices=True)
+
+selected_features=x.columns[selected_feature_indices]
+print("Selected Features:")
+print(selected_features)
+```
+![alt text](image-17.png)
+```python
+
+import pandas as pd
+import numpy as np
+from scipy.stats import chi2_contingency
+
+import seaborn as sns
+tips=sns.load_dataset('tips')
+tips.head()
+```
+![alt text](image-18.png)
+```python
+
+tips.time.unique()
+```
+![alt text](image-19.png)
+```python
+
+contingency_table=pd.crosstab(tips['sex'],tips['time'])
+print(contingency_table)
+```
+![alt text](image-20.png)
+```python
+
+chi2,p,_,_=chi2_contingency(contingency_table)
+print(f"Chi-Square Statistics: {chi2}")
+print(f"P-Value: {p}")
+```
+![alt text](image-21.png)
 #### RESULT:
-Thus the program to read the given data and perform Feature Scaling and Feature Selection process and save the data to a file is been executed.
+Thus, Feature selection and Feature scaling has been used on thegiven dataset.
