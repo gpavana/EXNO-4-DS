@@ -1,32 +1,32 @@
-# EXNO:4-DS
-# DATE:
-# AIM:
+## EXNO:4-DS
+### DATE:
+#### AIM:
 To read the given data and perform Feature Scaling and Feature Selection process and save the
 data to a file.
 
-# ALGORITHM:
+#### ALGORITHM:
 STEP 1:Read the given Data.
 STEP 2:Clean the Data Set using Data Cleaning Process.
 STEP 3:Apply Feature Scaling for the feature in the data set.
 STEP 4:Apply Feature Selection for the feature in the data set.
 STEP 5:Save the data to the file.
 
-# FEATURE SCALING:
+#### FEATURE SCALING:
 1. Standard Scaler: It is also called Z-score normalization. It calculates the z-score of each value and replaces the value with the calculated Z-score. The features are then rescaled with x̄ =0 and σ=1
 2. MinMaxScaler: It is also referred to as Normalization. The features are scaled between 0 and 1. Here, the mean value remains same as in Standardization, that is,0.
 3. Maximum absolute scaling: Maximum absolute scaling scales the data to its maximum value; that is,it divides every observation by the maximum value of the variable.The result of the preceding transformation is a distribution in which the values vary approximately within the range of -1 to 1.
 4. RobustScaler: RobustScaler transforms the feature vector by subtracting the median and then dividing by the interquartile range (75% value — 25% value).
 
-# FEATURE SELECTION:
+#### FEATURE SELECTION:
 Feature selection is to find the best set of features that allows one to build useful models. Selecting the best features helps the model to perform well.
 The feature selection techniques used are:
 1.Filter Method
 2.Wrapper Method
 3.Embedded Method
 
-# CODING AND OUTPUT:
+#### CODING AND OUTPUT:
 
-## Feature Scaling
+#### Feature Scaling
 ![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/c0fcc85b-1a64-42a1-b695-a77acc191a1c)
 
 ![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/3c511b62-cf5b-4ed4-aafd-7e98ef34adb1)
@@ -59,7 +59,7 @@ The feature selection techniques used are:
 
 ![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/c3870d08-7ae6-4a25-a83f-17e242e86a76)
 
-## Feature Selection
+#### Feature Selection
 ![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/44e6c707-522d-46c2-8dc9-ead0ec8da4d7)
 
 ![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/2d3622e5-a59e-493f-8e84-d7138ccfa65b)
@@ -74,5 +74,5 @@ The feature selection techniques used are:
 
 ![image](https://github.com/SamyukthaSreenivasan/EXNO-4-DS/assets/119475703/bd40332c-e997-4618-82e1-f33d78ee5af9)
 
-# RESULT:
+#### RESULT:
 Thus the program to read the given data and perform Feature Scaling and Feature Selection process and save the data to a file is been executed.
